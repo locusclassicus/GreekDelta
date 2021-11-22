@@ -1,0 +1,149 @@
+---
+title: "ExtractText.Rmd"
+output: html_document
+---
+
+## Download the Corpus
+
+```{r}
+url <- "https://figshare.com/ndownloader/files/11296247"
+file_name <- "Diorisis.zip"
+download.file(url, "Diorisis.zip")
+diorisis_list <- unzip("Diorisis.zip", files = NULL, list = TRUE) 
+```
+
+## Unzip Selected
+
+```{r}
+## Aeschines
+aeschines_list <- grep("(0026)", diorisis_list$Name, ignore.case=TRUE, value=TRUE) 
+aeschines_1 <- grep("(001)", aeschines_list, ignore.case=TRUE, value=TRUE)
+aeschines_2 <- grep("(003)", aeschines_list, ignore.case=TRUE, value=TRUE)
+unzip("Diorisis.zip", files = c(aeschines_1, aeschines_2))
+
+## Aristides
+aristides_list <- grep("(0284)", diorisis_list$Name, ignore.case=TRUE, value=TRUE) 
+aristides_1 <- grep("(023)", aristides_list, ignore.case=TRUE, value=TRUE)
+aristides_2 <- grep("(045)", aristides_list, ignore.case=TRUE, value=TRUE)
+unzip("Diorisis.zip", files = c(aristides_1, aristides_2))
+
+## Aretaeus
+aretaeus_list <- grep("(0719)", diorisis_list$Name, ignore.case=TRUE, value=TRUE) 
+aretaeus_1 <- grep("(001)", aretaeus_list, ignore.case=TRUE, value=TRUE)
+aretaeus_2 <- grep("(002)", aretaeus_list, ignore.case=TRUE, value=TRUE)
+unzip("Diorisis.zip", files = c(aretaeus_1, aretaeus_2))
+
+## Aristotle 
+aristotle_list <- grep("(0086)", diorisis_list$Name, ignore.case=TRUE, value=TRUE) 
+aristotle_1 <- grep("(010)", aristotle_list, ignore.case=TRUE, value=TRUE)
+unzip("Diorisis.zip", files = aristotle_1)
+
+## Demosthenes
+demosthenes_list <- grep("(0014)", diorisis_list$Name, ignore.case=TRUE, value=TRUE) 
+demosthenes_1 <- grep("(018)", demosthenes_list, ignore.case=TRUE, value=TRUE)
+demosthenes_2 <- grep("(004)", demosthenes_list, ignore.case=TRUE, value=TRUE)
+unzip("Diorisis.zip", files = c(demosthenes_1, demosthenes_2))
+
+## Epictetus
+epictetus_list <- grep("(0557)", diorisis_list$Name, ignore.case=TRUE, value=TRUE) 
+epictetus_1 <- grep("(001)", epictetus_list, ignore.case=TRUE, value=TRUE)
+unzip("Diorisis.zip", files = epictetus_1)
+
+## Galenus
+galenus_list <- grep("(0057)", diorisis_list$Name, ignore.case=TRUE, value=TRUE) 
+galenus_1 <- grep("(010)", galenus_list, ignore.case=TRUE, value=TRUE)
+unzip("Diorisis.zip", files = galenus_1)
+
+## Herodotus
+herodotus_list <- grep("(0016)", diorisis_list$Name, ignore.case=TRUE, value=TRUE) 
+herodotus_1 <- grep("(001)", herodotus_list, ignore.case=TRUE, value=TRUE)
+unzip("Diorisis.zip", files = herodotus_1)
+
+## Hippocrates
+hippocrates_list <- grep("(0627)", diorisis_list$Name, ignore.case=TRUE, value=TRUE) 
+hippocrates_1 <- grep("(001)", hippocrates_list, ignore.case=TRUE, value=TRUE)
+hippocrates_2 <- grep("(010)", hippocrates_list, ignore.case=TRUE, value=TRUE)
+unzip("Diorisis.zip", files = c(hippocrates_1, hippocrates_2))
+
+## Lucianus
+lucianus_list <- grep("(0062)", diorisis_list$Name, ignore.case=TRUE, value=TRUE) 
+lucianus_1 <- grep("(066)", lucianus_list, ignore.case=TRUE, value=TRUE)
+lucianus_2 <- grep("(068)", lucianus_list, ignore.case=TRUE, value=TRUE)
+unzip("Diorisis.zip", files = c(lucianus_1, lucianus_2))
+
+## Plato 
+plato_list <- grep("(0059)", diorisis_list$Name, ignore.case=TRUE, value=TRUE) 
+plato_1 <- grep("(018)", plato_list, ignore.case=TRUE, value=TRUE)
+plato_2 <- grep("(006)", plato_list, ignore.case=TRUE, value=TRUE)
+unzip("Diorisis.zip", files = c(plato_1, plato_2))
+
+## Plutarchus
+plutarchus_list <- grep("(0007)", diorisis_list$Name, ignore.case=TRUE, value=TRUE) 
+plutarchus_1 <- grep("(092)", plutarchus_list, ignore.case=TRUE, value=TRUE)
+plutarchus_2 <- grep("(090)", plutarchus_list, ignore.case=TRUE, value=TRUE)
+unzip("Diorisis.zip", files = c(plutarchus_1, plutarchus_2))
+
+## Thucydides
+thucydides_list <- grep("(0003)", diorisis_list$Name, ignore.case=TRUE, value=TRUE) 
+thucydides_1 <- grep("(001)", thucydides_list, ignore.case=TRUE, value=TRUE)
+unzip("Diorisis.zip", files = thucydides_1)
+
+## Xenophon
+xenophon_list <- grep("(0032)", diorisis_list$Name, ignore.case=TRUE, value=TRUE) 
+xenophon_1 <- grep("(006)", xenophon_list, ignore.case=TRUE, value=TRUE)
+xenophon_2 <- grep("(001)", xenophon_list, ignore.case=TRUE, value=TRUE)
+unzip("Diorisis.zip", files = c(xenophon_1, xenophon_2))
+```
+
+## Rename files 
+```{r}
+library(filesstrings)
+remove_filename_spaces(".")
+file_names_old <- list.files(pattern = ".xml")
+file_names_new <- c("Aeschines_Ctes.xml", "Aeschines_Tim.xml",  "Aretaeus_1.xml", "Aretaeus_2.xml", "Aristides_23.xml", "Aristides_045.xml", "Aristotle_NE.xml", "Demosthenes_1Phil.xml", "Demosthenes_Crown.xml", "Epictetus_Diss.xml", "Galen_Fac.xml", "Herodotus_Hist.xml", "Hippocrates_PM.xml", "Hippocrates_Art.xml", "Lucian_DD.xml", "Lucian_DM.xml", "Plato_Chrm.xml", "Plato_Tht.xml",   "Plutarch_Orac.xml", "Plutarch_E.xml", "Thucydides_Hist.xml", "Xenophon_Anab.xml", "Xenophon_Hell.xml")
+file.rename(from=file_names_old, to=paste0(file_names_new))
+list.files(pattern = ".xml")
+```
+
+## Extract lemmata
+```{r}
+library(XML)
+filenames <- list.files(pattern = ".xml")
+
+for (i in filenames){
+        url = paste("./", i, sep = "")
+        doc <- xmlTreeParse(url, useInternalNodes = TRUE, isURL = F)
+        rootnode  <- xmlRoot(doc)
+        text <- xpathSApply(rootnode, "//TEI.2/text/body/sentence/word/lemma", xmlGetAttr, 'entry')
+        text <- as.character(text)
+        y <-gsub(".xml","", i)
+        outname <-  paste(y, ".txt", sep= "") 
+        write.table(text, outname, row.names = FALSE, col.names = FALSE, quote = FALSE)
+}
+dir.create("Unicode")
+files_unicode <- list.files(pattern = ".txt")
+file.copy(files_unicode, "Unicode")
+file.remove(files_unicode)
+```
+
+## Extract Wordforms
+```{r}
+filenames <- list.files(pattern = ".xml")
+for (i in filenames){
+        url = paste("./", i, sep = "")
+        doc <- xmlTreeParse(url, useInternalNodes = TRUE, isURL = F)
+        rootnode  <- xmlRoot(doc)
+        text <- xpathSApply(rootnode, "//TEI.2/text/body/sentence/word", xmlGetAttr, 'form')
+        text <- as.character(text)
+        y <-gsub(".xml","", i)
+        outname <-  paste(y, "B.txt", sep= "") ## B for Betacode
+        write.table(text, outname, row.names = FALSE, col.names = FALSE, quote = FALSE)
+}
+
+dir.create("Betacode")
+files_betacode <- list.files(pattern = ".txt")
+file.copy(files_betacode, "Betacode")
+file.remove(files_betacode)
+file.remove(filenames)
+file.remove("Diorisis.zip")
+```
