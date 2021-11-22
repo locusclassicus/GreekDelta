@@ -1,0 +1,42 @@
+---
+title: "BetacodeClean"
+output: html_document
+---
+
+## Remove Special Characters
+
+Here is an example of text in Betacode:
+
+    prw=ton me/n w)= a)/ndres *)aqhnai=oi toi=s
+    qeoi=s eu)/xomai pa=si kai\ pa/sais o(/shn
+    eu)/noian e)/xwn e)gw\ diatelw= th=|
+
+We want to remove characters that stand for accent "/" "\\", "=", spiritus ")" "(" and capital letters "*", but to keep iota subscriptum "|".
+
+```{r}
+setwd("Betacode")
+library(stylo)
+beta_corpus <- load.corpus(files="all", corpus.dir = getwd())
+clean_beta <- lapply(X = beta_corpus, FUN = function(t) gsub(pattern = "\\", replacement = "", x = t, fixed = TRUE))
+clean_beta <- lapply(X = clean_beta, FUN = function(t) gsub(pattern = "/", replacement = "", x = t, fixed = TRUE))
+clean_beta <- lapply(X = clean_beta, FUN = function(t) gsub(pattern = "(", replacement = "", x = t, fixed = TRUE))
+clean_beta <- lapply(X = clean_beta, FUN = function(t) gsub(pattern = ")", replacement = "", x = t, fixed = TRUE))
+clean_beta <- lapply(X = clean_beta, FUN = function(t) gsub(pattern = "=", replacement = "", x = t, fixed = TRUE))
+clean_beta <- lapply(X = clean_beta, FUN = function(t) gsub(pattern = "*", replacement = "", x = t, fixed = TRUE))
+```
+
+## Write new files (no diacritics)
+
+```{r}
+filenames <- list.files() 
+file.remove(filenames) ## remove old files 
+
+for(i in names(clean_beta)){
+  outname <-  paste(i)
+  write.table(clean_beta[i], outname, row.names = FALSE, col.names = FALSE, quote = FALSE)
+} ## drops files into the directory
+```
+
+       
+}
+```
