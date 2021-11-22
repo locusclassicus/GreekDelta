@@ -1,0 +1,140 @@
+---
+title: "BalanceCorpus"
+output: html_document
+---
+
+## Split big texts (Unicode)
+```{r}
+library(stylo)
+setwd("Unicode")
+
+## Aristotle
+Aristotle <- load.corpus.and.parse(files="Aristotle_NE.txt", corpus.dir = getwd(), markup.type= "plain", corpus.lang = "Other", splitting.rule = NULL, sample.size = 15000, sampling = "normal.sampling", sample.overlap = 0, features = "w", ngram.size = 1, preserve.case = FALSE, encoding = "UTF-8")
+
+for(i in names(Aristotle)){
+  outname <-  paste(i, ".txt", sep="")
+  write.table(Aristotle[i], outname, row.names = FALSE, col.names = FALSE, quote = FALSE)
+}
+file.remove(c("Aristotle_NE.txt", "Aristotle_NE_3.txt"))
+
+## Epictetus
+Epictetus <- load.corpus.and.parse(files="Epictetus_Diss.txt", corpus.dir = getwd(), markup.type= "plain", corpus.lang = "Other", splitting.rule = NULL, sample.size = 15000, sampling = "normal.sampling", sample.overlap = 0, features = "w", ngram.size = 1, preserve.case = FALSE, encoding = "UTF-8")
+
+for(i in names(Epictetus)){
+  outname <-  paste(i, ".txt", sep="")
+  write.table(Epictetus[i], outname, row.names = FALSE, col.names = FALSE, quote = FALSE)
+}
+file.remove(c("Epictetus_Diss.txt", "Epictetus_Diss_3.txt", "Epictetus_Diss_4.txt"))
+
+## Thucydides
+Thucydides <- load.corpus.and.parse(files="Thucydides_Hist.txt", corpus.dir = getwd(), markup.type= "plain", corpus.lang = "Other", splitting.rule = NULL, sample.size = 15000, sampling = "normal.sampling", sample.overlap = 0, features = "w", ngram.size = 1, preserve.case = FALSE, encoding = "UTF-8")
+
+for(i in names(Thucydides)){
+  outname <-  paste(i, ".txt", sep="")
+  write.table(Thucydides[i], outname, row.names = FALSE, col.names = FALSE, quote = FALSE)
+}
+file.remove(c("Thucydides_Hist.txt", "Thucydides_Hist_3.txt", "Thucydides_Hist_4.txt", "Thucydides_Hist_5.txt", "Thucydides_Hist_6.txt", "Thucydides_Hist_7.txt", "Thucydides_Hist_8.txt", "Thucydides_Hist_9.txt", "Thucydides_Hist_10.txt"))
+
+## Herodotus
+Herodotus <- load.corpus.and.parse(files="Herodotus_Hist.txt", corpus.dir = getwd(), markup.type= "plain", corpus.lang = "Other", splitting.rule = NULL, sample.size = 15000, sampling = "normal.sampling", sample.overlap = 0, features = "w", ngram.size = 1, preserve.case = FALSE, encoding = "UTF-8")
+
+for(i in names(Herodotus)){
+  outname <-  paste(i, ".txt", sep="")
+  write.table(Herodotus[i], outname, row.names = FALSE, col.names = FALSE, quote = FALSE)
+}
+file.remove(c("Herodotus_Hist.txt", "Herodotus_Hist_3.txt", "Herodotus_Hist_4.txt", "Herodotus_Hist_5.txt", "Herodotus_Hist_6.txt", "Herodotus_Hist_7.txt", "Herodotus_Hist_8.txt", "Herodotus_Hist_9.txt", "Herodotus_Hist_10.txt", "Herodotus_Hist_11.txt", "Herodotus_Hist_12.txt" ))
+
+## Xenophon
+Anabasis <- load.corpus.and.parse(files="Xenophon_Anab.txt", corpus.dir = getwd(), markup.type= "plain", corpus.lang = "Other", splitting.rule = NULL, sample.size = 15000, sampling = "normal.sampling", sample.overlap = 0, features = "w", ngram.size = 1, preserve.case = FALSE, encoding = "UTF-8")
+
+for(i in names(Anabasis)){
+  outname <-  paste(i, ".txt", sep="")
+  write.table(Anabasis[i], outname, row.names = FALSE, col.names = FALSE, quote = FALSE)
+}
+file.remove(c("Xenophon_Anab.txt", "Xenophon_Anab_2.txt","Xenophon_Anab_3.txt"))
+
+Hellenica <- load.corpus.and.parse(files="Xenophon_Hell.txt", corpus.dir = getwd(), markup.type= "plain", corpus.lang = "Other", splitting.rule = NULL, sample.size = 15000, sampling = "normal.sampling", sample.overlap = 0, features = "w", ngram.size = 1, preserve.case = FALSE, encoding = "UTF-8")
+
+for(i in names(Hellenica)){
+  outname <-  paste(i, ".txt", sep="")
+  write.table(Hellenica[i], outname, row.names = FALSE, col.names = FALSE, quote = FALSE)
+}
+file.remove(c("Xenophon_Hell.txt", "Xenophon_Hell_2.txt","Xenophon_Hell_3.txt", "Xenophon_Hell_4.txt"))
+
+## Galenus
+Galen <- load.corpus.and.parse(files="Galen_Fac.txt", corpus.dir = getwd(), markup.type= "plain", corpus.lang = "Other", splitting.rule = NULL, sample.size = 15000, sampling = "normal.sampling", sample.overlap = 0, features = "w", ngram.size = 1, preserve.case = FALSE, encoding = "UTF-8")
+
+for(i in names(Galen)){
+  outname <-  paste(i, ".txt", sep="")
+  write.table(Galen[i], outname, row.names = FALSE, col.names = FALSE, quote = FALSE)
+}
+file.remove("Galen_Fac.txt")
+```
+
+## Split big texts (Betacode)
+```{r}
+setwd("Betacode")
+
+## Aristotle
+AristotleB <- load.corpus.and.parse(files="Aristotle_NEB.txt", corpus.dir = getwd(), markup.type= "plain", corpus.lang = "Other", splitting.rule = NULL, sample.size = 15000, sampling = "normal.sampling", sample.overlap = 0, features = "w", ngram.size = 1, preserve.case = FALSE, encoding = "UTF-8")
+
+for(i in names(AristotleB)){
+  outname <-  paste(i, ".txt", sep="")
+  write.table(AristotleB[i], outname, row.names = FALSE, col.names = FALSE, quote = FALSE)
+}
+file.remove(c("Aristotle_NEB.txt", "Aristotle_NEB_3.txt"))
+
+## Epictetus
+EpictetusB <- load.corpus.and.parse(files="Epictetus_DissB.txt", corpus.dir = getwd(), markup.type= "plain", corpus.lang = "Other", splitting.rule = NULL, sample.size = 15000, sampling = "normal.sampling", sample.overlap = 0, features = "w", ngram.size = 1, preserve.case = FALSE, encoding = "UTF-8")
+
+for(i in names(EpictetusB)){
+  outname <-  paste(i, ".txt", sep="")
+  write.table(EpictetusB[i], outname, row.names = FALSE, col.names = FALSE, quote = FALSE)
+}
+file.remove(c("Epictetus_DissB.txt", "Epictetus_DissB_3.txt", "Epictetus_DissB_4.txt", "Epictetus_DissB_5.txt"))
+
+## Thucydides
+ThucydidesB <- load.corpus.and.parse(files="Thucydides_HistB.txt", corpus.dir = getwd(), markup.type= "plain", corpus.lang = "Other", splitting.rule = NULL, sample.size = 15000, sampling = "normal.sampling", sample.overlap = 0, features = "w", ngram.size = 1, preserve.case = FALSE, encoding = "UTF-8")
+
+for(i in names(ThucydidesB)){
+  outname <-  paste(i, ".txt", sep="")
+  write.table(ThucydidesB[i], outname, row.names = FALSE, col.names = FALSE, quote = FALSE)
+}
+file.remove(c("Thucydides_HistB.txt", "Thucydides_HistB_3.txt", "Thucydides_HistB_4.txt", "Thucydides_HistB_5.txt", "Thucydides_HistB_6.txt", "Thucydides_HistB_7.txt", "Thucydides_HistB_8.txt", "Thucydides_HistB_9.txt", "Thucydides_HistB_10.txt"))
+
+## Herodotus
+HerodotusB <- load.corpus.and.parse(files="Herodotus_HistB.txt", corpus.dir = getwd(), markup.type= "plain", corpus.lang = "Other", splitting.rule = NULL, sample.size = 15000, sampling = "normal.sampling", sample.overlap = 0, features = "w", ngram.size = 1, preserve.case = FALSE, encoding = "UTF-8")
+
+for(i in names(HerodotusB)){
+  outname <-  paste(i, ".txt", sep="")
+  write.table(HerodotusB[i], outname, row.names = FALSE, col.names = FALSE, quote = FALSE)
+}
+file.remove(c("Herodotus_HistB.txt", "Herodotus_HistB_3.txt", "Herodotus_HistB_4.txt", "Herodotus_HistB_5.txt", "Herodotus_HistB_6.txt", "Herodotus_HistB_7.txt", "Herodotus_HistB_8.txt", "Herodotus_HistB_9.txt", "Herodotus_HistB_10.txt", "Herodotus_HistB_11.txt", "Herodotus_HistB_12.txt" ))
+
+## Xenophon
+AnabasisB <- load.corpus.and.parse(files="Xenophon_AnabB.txt", corpus.dir = getwd(), markup.type= "plain", corpus.lang = "Other", splitting.rule = NULL, sample.size = 15000, sampling = "normal.sampling", sample.overlap = 0, features = "w", ngram.size = 1, preserve.case = FALSE, encoding = "UTF-8")
+
+for(i in names(AnabasisB)){
+  outname <-  paste(i, ".txt", sep="")
+  write.table(AnabasisB[i], outname, row.names = FALSE, col.names = FALSE, quote = FALSE)
+}
+file.remove(c("Xenophon_AnabB.txt", "Xenophon_AnabB_2.txt","Xenophon_AnabB_3.txt"))
+
+HellenicaB <- load.corpus.and.parse(files="Xenophon_HellB.txt", corpus.dir = getwd(), markup.type= "plain", corpus.lang = "Other", splitting.rule = NULL, sample.size = 15000, sampling = "normal.sampling", sample.overlap = 0, features = "w", ngram.size = 1, preserve.case = FALSE, encoding = "UTF-8")
+
+for(i in names(HellenicaB)){
+  outname <-  paste(i, ".txt", sep="")
+  write.table(HellenicaB[i], outname, row.names = FALSE, col.names = FALSE, quote = FALSE)
+}
+file.remove(c("Xenophon_HellB.txt", "Xenophon_HellB_2.txt","Xenophon_HellB_3.txt", "Xenophon_HellB_4.txt"))
+
+## Galenus
+GalenB <- load.corpus.and.parse(files="Galen_FacB.txt", corpus.dir = getwd(), markup.type= "plain", corpus.lang = "Other", splitting.rule = NULL, sample.size = 15000, sampling = "normal.sampling", sample.overlap = 0, features = "w", ngram.size = 1, preserve.case = FALSE, encoding = "UTF-8")
+
+for(i in names(GalenB)){
+  outname <-  paste(i, ".txt", sep="")
+  write.table(GalenB[i], outname, row.names = FALSE, col.names = FALSE, quote = FALSE)
+}
+file.remove("Galen_FacB.txt")
+```
+
