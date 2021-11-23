@@ -1,0 +1,81 @@
+---
+title: "Size.Penalize"
+output: html_document
+---
+## Size.Penalize Unicode
+```{r}
+sp_u <- size.penalize(mfw = c(100, 200, 500), corpus.dir = "Unicode",
+sample.size.coverage = c(1000, 3000, 5000), sample.with.replacement = TRUE, iterations = 100, classification.method = "delta")
+
+## select accuracy scores by sample size
+u1000 <- c()
+u3000 <- c()
+u5000 <- c()
+for(i in 1:length(sp_u$accuracy.scores)){
+  mtr <- sp_u$accuracy.scores[[i]]
+  mtr1000 <- mtr[,1]
+  mtr3000 <- mtr[,2]
+  mtr5000 <- mtr[,3]
+  u1000 <- c(u1000, mtr1000)
+  u3000 <- c(u3000, mtr3000)
+  u5000 <- c(u5000, mtr5000)
+}
+u_df <- cbind(u1000, u3000)
+u_df <- cbind(u_df, u5000)
+colnames(u_df) <- c("1K", "3K", "5K")
+library(reshape2) ## convert df to long format
+u_df_long <- melt(u_df)
+colnames(u_df_long) <- c("mfw", "sample_size", "accuracy")
+
+## plot accuracy vs. sample size vs. mfw
+library(lattice)
+bwplot(accuracy ~ sample_size|mfw, data = u_df_long)
+```
+
+## Size.Penalize Betacode
+```{r}
+sp_b <- size.penalize(mfw = c(100, 200, 500), corpus.dir = "Betacode", sample.size.coverage = c(1000, 3000, 5000), sample.with.replacement = TRUE, iterations = 100, classification.method = "delta")
+
+## select accuracy scores by sample size
+b1000 <- c()
+b3000 <- c()
+b5000 <- c()
+for(i in 1:length(sp_b$accuracy.scores)){
+  mtrB <- sp_b$accuracy.scores[[i]]
+  mtrB1000 <- mtrB[,1]
+  mtrB3000 <- mtrB[,2]
+  mtrB5000 <- mtrB[,3]
+  b1000 <- c(b1000, mtrB1000)
+  b3000 <- c(b3000, mtrB3000)
+  b5000 <- c(b5000, mtrB5000)
+}
+b_df <- cbind(b1000, b3000)
+b_df <- cbind(b_df, b5000)
+colnames(b_df) <- c("1K", "3K", "5K")
+
+## convert df to long format
+b_df_long <- melt(b_df)
+colnames(b_df_long) <- c("mfw", "sample_size", "accuracy")
+
+## plot accuracy vs. sample size vs. mfw
+bwplot(accuracy ~ sample_size|mfw, data = b_df_long)
+```
+
+## Mean values
+```{r}
+## unicode data
+u_df.100 <-   u_df[row.names(u_df) %in% c("mfw_100"),]
+u_df.200 <-   u_df[row.names(u_df) %in% c("mfw_200"),]
+u_df.500 <-   u_df[row.names(u_df) %in% c("mfw_500"),]
+round(colMeans(u_df.100), 2)
+round(colMeans(u_df.200), 2)
+round(colMeans(u_df.500),2)
+
+## betacode data
+b_df.100 <-   b_df[row.names(b_df) %in% c("mfw_100"),]
+b_df.200 <-   b_df[row.names(b_df) %in% c("mfw_200"),]
+b_df.500 <-   b_df[row.names(b_df) %in% c("mfw_500"),]
+round(colMeans(b_df.100), 2)
+round(colMeans(b_df.200), 2)
+round(colMeans(b_df.500),2)
+```
