@@ -2,7 +2,7 @@
 title: "1Phil_Shorlist"
 output: html_document
 ---
-
+## no sampling 
 ```{r}
 library(stylo)
 corpus_all <- load.corpus.and.parse(files = "all", corpus.dir = "Unicode_No1Phil", markup.type= "plain", corpus.lang = "Other", sampling = "no.sampling", preserve.case = FALSE, encoding = "UTF-8") 
@@ -23,3 +23,16 @@ dim(freq)
 ## calculate delta
 my_delta <- perform.delta(training.set = freq[1:28,], test.set = freq[29:30,], distance = "delta", no.of.candidates = 3, z.scores.both.sets = FALSE)
 my_delta$ranking
+```
+
+## 1000-w samples 
+```{r}
+test_corpus1000 <- load.corpus.and.parse(files = "Demosthenes_1Phil.txt", corpus.dir = getwd(), markup.type= "plain", corpus.lang = "Other", sampling = "normal.sampling", sample.size = 1000, preserve.case = FALSE, encoding = "UTF-8")
+
+corpus1000 <- c(corpus_all, test_corpus1000)
+freq1000 <- as.data.frame.matrix(as.table(make.table.of.frequencies(corpus1000, mfw, absent.sensitive = FALSE)))
+dim(freq1000)
+
+my_delta1000 <- perform.delta(training.set = freq1000[1:28,], test.set = freq1000[29:31,], distance = "delta", no.of.candidates = 5, z.scores.both.sets = FALSE)
+my_delta1000$ranking
+my_delta1000$scores
