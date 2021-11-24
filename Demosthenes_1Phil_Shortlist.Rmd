@@ -1,0 +1,25 @@
+---
+title: "1Phil_Shorlist"
+output: html_document
+---
+
+```{r}
+library(stylo)
+corpus_all <- load.corpus.and.parse(files = "all", corpus.dir = "Unicode_No1Phil", markup.type= "plain", corpus.lang = "Other", sampling = "no.sampling", preserve.case = FALSE, encoding = "UTF-8") 
+
+test_corpus <- load.corpus.and.parse(files = "Demosthenes_1Phil.txt", corpus.dir = getwd(), markup.type= "plain", corpus.lang = "Other", sampling = "no.sampling", preserve.case = FALSE, encoding = "UTF-8")
+
+corpus <- c(corpus_all, test_corpus)
+corpus <- c(corpus, test_corpus)
+
+## make frequency list
+mfw <- make.frequency.list(corpus)
+mfw <- mfw[1:100]
+mfw <- mfw[-14] ## remove NULL value
+
+freq <- as.data.frame.matrix(as.table(make.table.of.frequencies(corpus, mfw, absent.sensitive = FALSE)))
+dim(freq)
+
+## calculate delta
+my_delta <- perform.delta(training.set = freq[1:28,], test.set = freq[29:30,], distance = "delta", no.of.candidates = 3, z.scores.both.sets = FALSE)
+my_delta$ranking
